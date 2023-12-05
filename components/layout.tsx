@@ -13,18 +13,19 @@ export const fontSans = FontSans({
 
 type LayoutProps = {
     children: ReactNode;
+    showHeader?: boolean; // Optional prop for showing the header
+    showFooter?: boolean; // Optional prop for showing the footer
 };
 
-const Layout: React.FC<LayoutProps> = ({ children }) => {
-
+const Layout: React.FC<LayoutProps> = ({ children, showHeader = true, showFooter = true }) => {
     return (
         <main className={cn(
             "min-h-screen bg-background font-sans antialiased bg-stone-100",
             fontSans.variable
         )}>
-            <Navbar />
+            {showHeader && <Navbar />}
             <main className='max-w-screen-lg bg-stone-100 mx-auto'>{children}</main>
-            <Footer />
+            {showFooter && <Footer />}
         </main>
     )
 }
