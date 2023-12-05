@@ -202,6 +202,7 @@ const HypnotherapyPage = () => {
 
     return (
         <Layout showHeader={false} showFooter={false}>
+           
             <div className="container mx-auto p-4 py-12">
                 <section className="text-start rounded-lg ">
                     <h1 className="text-4xl font-bold mb-4">{details.title}</h1>
