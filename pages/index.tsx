@@ -23,19 +23,19 @@ export default function Home() {
       name: 'Hipnoterapi',
       description: 'Personalized hypnotherapy sessions for mental well-being and self-improvement.',
       icon: Shell,
-      link: '/hipnoterapi'
+      link: '/services/hipnoterapi'
     },
     {
       name: 'Training',
       description: 'Engaging training programs to enhance your life skills and professional competencies.',
       icon: Brain,
-      link: '/training'
+      link: '/services/training'
     },
     {
       name: 'Coaching',
       description: 'One-on-one coaching to help you navigate life’s challenges and achieve your goals.',
       icon: Cpu,
-      link: '/coaching'
+      link: '/services/coaching'
     }
   ];
 
@@ -120,8 +120,15 @@ export default function Home() {
                   We believe in a holistic approach to self-improvement and are dedicated
                   to helping you unlock your full potential.
                 </p>
+              <Button
+                asChild
+                // variant={"outline"}
+className='my-4'
+              >
+                <Link href={"/about"}>Read More About Us</Link>
+              </Button>
               </div>
-             
+            
             </div>
 
         </div>
@@ -170,7 +177,7 @@ export default function Home() {
               variant={"outline"}
 
             >
-              <Link href={"/about-us"}>Read More About Us</Link>
+              <Link href={"/about"}>Read More About Us</Link>
             </Button>
           </div>
         </div>
