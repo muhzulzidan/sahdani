@@ -1,0 +1,35 @@
+{
+    "title": "Coaching",
+    "description": "Our coaching services are designed to provide personalized, one-on-one support tailored to your unique goals and challenges. Whether you’re navigating career transitions, seeking personal development, or tackling specific professional hurdles, our coaching sessions offer a space for growth and self-discovery.",
+    "process": "Our coaching methodology is client-centered and goal-oriented. We start with a comprehensive assessment to understand your objectives and challenges. Sessions are then structured around these goals, using a mix of guided conversations, reflective exercises, and action planning. Our approach is adaptive, evolving with your progress and insights.",
+    "duration": "Programs typically span 6 months, with the flexibility to extend based on individual needs. Each session lasts about an hour, held bi-weekly or monthly.",
+    "pricing": "Pricing starts from $200 per month, with packages customizable to the frequency and duration of sessions.",
+    "benefits": [
+        "Tailored Strategies for Personal and Professional Development",
+        "Enhanced Self-Awareness and Decision-Making Skills",
+        "Structured Support in Achieving Specific Goals",
+        "Tools and Techniques for Long-Term Success and Fulfillment"
+    ],
+    "faqs": [
+        {
+            "question": "What is the focus of your coaching?",
+            "answer": "Our coaching focuses on empowering you to achieve your personal and professional goals, providing support in areas such as career development, leadership skills, and personal growth."
+        },
+        {
+            "question": "How do I know if coaching is right for me?",
+            "answer": "Coaching is beneficial if you are seeking structured and personalized support to achieve specific goals or navigate life’s challenges. It’s ideal for those who are ready to take proactive steps towards personal and professional growth."
+        },
+        {
+            "question": "What is the difference between coaching and therapy?",
+            "answer": "While both coaching and therapy can facilitate personal development, coaching is more focused on goal-setting and future-oriented growth, whereas therapy often deals with healing and resolving past issues."
+        },
+        {
+            "question": "How are the coaching sessions conducted?",
+            "answer": "Coaching sessions are conducted in a private and confidential manner, focusing on the client's individual needs and goals. Sessions can be conducted in-person, over the phone, or via video conferencing."
+        },
+        {
+            "question": "Can I customize my coaching program?",
+            "answer": "Yes, coaching programs are highly customizable. We work with you to create a program that aligns with your specific goals and schedule."
+        }
+    ]
+}

@@ -1,0 +1,42 @@
+{
+    "title": "Hipnoterapi",
+    "description": "Hipnoterapi adalah teknik terapeutik transformatif yang menggunakan hipnosis untuk menjangkau pikiran bawah sadar, mendorong perubahan mendalam dan pertumbuhan pribadi. Ini sangat efektif untuk meredakan stres, mengatasi fobia, dan modifikasi kebiasaan.",
+    "process": "Proses dimulai dengan konsultasi untuk memahami tujuan dan kekhawatiran Anda. Selama sesi, Anda akan dipandu ke dalam keadaan rileks dan seperti trance, di mana kita dapat mengatasi dan mereformasi pola dan pemicu bawah sadar.",
+    "duration": "Setiap sesi biasanya berlangsung selama 1 jam, dengan jumlah sesi bervariasi berdasarkan kebutuhan individu.",
+    "pricing": "Rp100.000 per sesi, dengan paket tersedia untuk beberapa sesi dengan tarif diskon.",
+    "benefits": [
+        "Efektif Meredakan Stres dan Kecemasan",
+        "Bantuan dalam Mengatasi Fobia dan Ketakutan",
+        "Dukungan untuk Perubahan Kebiasaan dan Pengembangan Pribadi"
+    ],
+    "faqs": [
+        {
+            "question": "Apa itu Hipnoterapi?",
+            "answer": "Hipnoterapi adalah teknik terapeutik yang menginduksi keadaan konsentrasi fokus dan relaksasi mendalam untuk mengatasi masalah pada tingkat bawah sadar."
+        },
+        {
+            "question": "Apakah Hipnoterapi aman?",
+            "answer": "Ya, hipnoterapi adalah praktik yang aman dan non-invasif ketika dilakukan oleh profesional bersertifikat. Ini adalah keadaan perhatian fokus alami dan tidak memiliki efek samping yang berbahaya."
+        },
+        {
+            "question": "Berapa banyak sesi yang akan saya butuhkan?",
+            "answer": "Jumlah sesi bervariasi tergantung pada tujuan dan kebutuhan individu Anda. Beberapa orang melihat perubahan dalam waktu sedikitnya 1-3 sesi, sementara yang lain mungkin memerlukan lebih banyak."
+        },
+        {
+            "question": "Apakah hasil hipnoterapi permanen?",
+            "answer": "Hasil hipnoterapi dapat sangat bertahan lama, terutama ketika klien berkomitmen pada proses dan mengikuti sesi tindak lanjut sesuai kebutuhan."
+        },
+        {
+            "question": "Bisakah semua orang dihipnotis?",
+            "answer": "Sebagian besar orang bisa dihipnotis hingga tingkat tertentu. Tingkat keberhasilan hipnoterapi bergantung pada kemauan dan keterbukaan klien terhadap proses hipnosis."
+        },
+        {
+            "question": "Apakah saya akan kehilangan kontrol selama hipnoterapi?",
+            "answer": "Tidak, Anda tidak akan kehilangan kontrol. Hipnoterapi adalah proses kolaboratif di mana Anda tetap sadar dan mempertahankan kendali atas pikiran dan tindakan Anda."
+        },
+        {
+            "question": "Apakah layanan hipnoterapi ini menerima BPJS?",
+            "answer": "Tidak, saat ini kami tidak menerima BPJS. Layanan hipnoterapi kami adalah layanan privat yang memerlukan pembayaran langsung kepada praktisi kami."
+        }
+    ]
+}

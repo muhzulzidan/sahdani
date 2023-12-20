@@ -1,19 +1,15 @@
 "use client"
-
 import { useRouter } from 'next/router';
 import Layout from '@/components/layout';
-import {
-    Accordion,
-    AccordionContent,
-    AccordionItem,
-    AccordionTrigger,
-} from "@/components/ui/accordion"
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { CheckCircle2 } from "lucide-react";
+import { CheckCircle2, Smile, Feather, UserPlus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { JSX, useState } from 'react';
+import Link from 'next/link';
+import { useState } from 'react';
+
 
 interface ServiceDetail {
     title: string;
@@ -47,30 +43,45 @@ interface ServicePricing {
 const serviceDetails: Record<string, ServiceDetail> = {
     hipnoterapi: {
         title: 'Hipnoterapi',
-        description: 'Hypnotherapy is a transformative therapeutic technique that uses hypnosis to tap into your subconscious mind, fostering deep-seated change and personal growth. It is particularly effective for stress relief, overcoming phobias, and habit modification.',
-        process: 'The process begins with a consultation to understand your goals and concerns. During the session, you will be guided into a relaxed, trance-like state, where we can address and reframe subconscious patterns and triggers.',
-        duration: 'Each session typically lasts for 1 hour, with the number of sessions varying based on individual needs.',
-        pricing: '$100 per session, with packages available for multiple sessions at a discounted rate.',
+        description: 'Hipnoterapi adalah teknik terapeutik transformatif yang menggunakan hipnosis untuk menjangkau pikiran bawah sadar, mendorong perubahan mendalam dan pertumbuhan pribadi. Ini sangat efektif untuk meredakan stres, mengatasi fobia, dan modifikasi kebiasaan.',
+        process: 'Proses dimulai dengan konsultasi untuk memahami tujuan dan kekhawatiran Anda. Selama sesi, Anda akan dipandu ke dalam keadaan rileks dan seperti trance, di mana kita dapat mengatasi dan mereformasi pola dan pemicu bawah sadar.',
+        duration: 'Setiap sesi biasanya berlangsung selama 1 jam, dengan jumlah sesi bervariasi berdasarkan kebutuhan individu.',
+        pricing: 'Rp100.000 per sesi, dengan paket tersedia untuk beberapa sesi dengan tarif diskon.',
         benefits: [
-            'Effective Stress and Anxiety Relief',
-            'Aid in Overcoming Phobias and Fears',
-            'Support for Habit Change and Personal Development'
+            'Efektif Meredakan Stres dan Kecemasan',
+            'Bantuan dalam Mengatasi Fobia dan Ketakutan',
+            'Dukungan untuk Perubahan Kebiasaan dan Pengembangan Pribadi'
         ],
         faqs: [
             {
-                question: 'What is Hypnotherapy?',
-                answer: 'Hypnotherapy is a therapeutic technique that induces a state of focused concentration and deep relaxation to address issues at the subconscious level.'
+                question: 'Apa itu Hipnoterapi?',
+                answer: 'Hipnoterapi adalah teknik terapeutik yang menginduksi keadaan konsentrasi fokus dan relaksasi mendalam untuk mengatasi masalah pada tingkat bawah sadar.'
             },
             {
-                question: 'Is Hypnotherapy safe?',
-                answer: 'Yes, hypnotherapy is a safe and non-invasive practice when conducted by a certified professional. It is a natural state of focused attention and has no harmful side effects.'
+                question: 'Apakah Hipnoterapi aman?',
+                answer: 'Ya, hipnoterapi adalah praktik yang aman dan non-invasif ketika dilakukan oleh profesional bersertifikat. Ini adalah keadaan perhatian fokus alami dan tidak memiliki efek samping yang berbahaya.'
             },
             {
-                question: 'How many sessions will I need?',
-                answer: 'The number of sessions varies depending on your individual goals and needs. Some see changes in as few as 1-3 sessions, while others may require more.'
+                question: 'Berapa banyak sesi yang akan saya butuhkan?',
+                answer: 'Jumlah sesi bervariasi tergantung pada tujuan dan kebutuhan individu Anda. Beberapa orang melihat perubahan dalam waktu sedikitnya 1-3 sesi, sementara yang lain mungkin memerlukan lebih banyak.'
             },
-            // ... more FAQs
-        ],
+            {
+                question: 'Apakah hasil hipnoterapi permanen?',
+                answer: 'Hasil hipnoterapi dapat sangat bertahan lama, terutama ketika klien berkomitmen pada proses dan mengikuti sesi tindak lanjut sesuai kebutuhan.'
+            },
+            {
+                question: 'Bisakah semua orang dihipnotis?',
+                answer: 'Sebagian besar orang bisa dihipnotis hingga tingkat tertentu. Tingkat keberhasilan hipnoterapi bergantung pada kemauan dan keterbukaan klien terhadap proses hipnosis.'
+            },
+            {
+                question: 'Apakah saya akan kehilangan kontrol selama hipnoterapi?',
+                answer: 'Tidak, Anda tidak akan kehilangan kontrol. Hipnoterapi adalah proses kolaboratif di mana Anda tetap sadar dan mempertahankan kendali atas pikiran dan tindakan Anda.'
+            },
+            {
+                question: 'Apakah layanan hipnoterapi ini menerima BPJS?',
+                answer: 'Tidak, saat ini kami tidak menerima BPJS. Layanan hipnoterapi kami adalah layanan privat yang memerlukan pembayaran langsung kepada praktisi kami.'
+            }
+        ]
     },
     training: {
         title: 'Training',
