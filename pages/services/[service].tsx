@@ -1,15 +1,24 @@
 "use client"
+
+import { useState } from 'react';
 import { useRouter } from 'next/router';
 import Layout from '@/components/layout';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { CheckCircle2, Smile, Feather, UserPlus } from "lucide-react";
+import { CheckCircle2, Smile, Feather, UserPlus,Brain, Users, Target, PenTool, Radio, Presentation, Mic, Weight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import Link from 'next/link';
-import { useState } from 'react';
 
+import sahdani from "@/public/images/sahdani.jpg"
+const BookSession = "https://wa.me/6285179561643";
+
+interface Benefit {
+    title: string;
+    description: string;
+    icon: any; // Assuming you're using React icons or similar
+}
 
 interface ServiceDetail {
     title: string;
@@ -17,21 +26,20 @@ interface ServiceDetail {
     process: string;
     duration: string;
     pricing: string;
-    benefits: string[];
+    benefits: Benefit[];
     faqs: { question: string; answer: string; }[];
 }
 
 interface PricingPlan {
     title: string;
-    monthlyPrice?: number;
-    yearlyPrice?: number;
+    pricePerSession: number | string;
     description: string;
     features: string[];
     actionLabel: string;
     popular?: boolean;
     exclusive?: boolean;
-    price?: string; // Add this if some plans have a string type price like "Custom"
 }
+
 
 
 // Defining an index signature for the servicePricing object
@@ -48,9 +56,9 @@ const serviceDetails: Record<string, ServiceDetail> = {
         duration: 'Setiap sesi biasanya berlangsung selama 1 jam, dengan jumlah sesi bervariasi berdasarkan kebutuhan individu.',
         pricing: 'Rp100.000 per sesi, dengan paket tersedia untuk beberapa sesi dengan tarif diskon.',
         benefits: [
-            'Efektif Meredakan Stres dan Kecemasan',
-            'Bantuan dalam Mengatasi Fobia dan Ketakutan',
-            'Dukungan untuk Perubahan Kebiasaan dan Pengembangan Pribadi'
+            { title: 'Meredakan Stres dan Kecemasan', description: 'Temukan ketenangan dan kejernihan pikiran, kurangi kecemasan dan stres sehari-hari.', icon: Smile },
+            { title: 'Mengatasi Fobia', description: 'Hadapi dan atasi fobia atau ketakutan spesifik dengan cara yang aman dan efektif.', icon: Feather },
+            { title: 'Pengembangan Diri', description: 'Dorong perubahan kebiasaan positif dan pertumbuhan pribadi untuk kualitas hidup yang lebih baik.', icon: UserPlus }
         ],
         faqs: [
             {
@@ -84,60 +92,90 @@ const serviceDetails: Record<string, ServiceDetail> = {
         ]
     },
     training: {
-        title: 'Training',
-        description: 'Our training programs are designed to empower individuals and teams with essential life skills. We specialize in communication, human resource development, persuasion, conflict resolution, and stress management. Our approach is practical, engaging, and tailored to the modern professional environment.',
-        process: 'Our training begins with an assessment of your team’s needs. We then design interactive workshops and seminars that combine theoretical knowledge with practical exercises. Each session is dynamic, involving group activities, discussions, and personal reflections to ensure a comprehensive learning experience.',
-        duration: 'Duration varies per program, typically ranging from half-day workshops to multi-day seminars.',
-        pricing: 'Pricing is based on the program’s length and customization. Contact us for a detailed quote.',
+        title: 'Pelatihan',
+        description: 'Program pelatihan kami dirancang untuk memberdayakan individu dan tim dengan keterampilan hidup yang esensial. Kami mengkhususkan diri dalam komunikasi, pengembangan sumber daya manusia, persuasi, resolusi konflik, dan manajemen stres. Pendekatan kami praktis, menarik, dan disesuaikan dengan lingkungan profesional modern.',
+        process: 'Pelatihan kami dimulai dengan penilaian kebutuhan tim Anda. Kami kemudian merancang workshop interaktif dan seminar yang menggabungkan pengetahuan teoritis dengan latihan praktis. Setiap sesi adalah dinamis, melibatkan aktivitas kelompok, diskusi, dan refleksi pribadi untuk memastikan pengalaman belajar yang komprehensif.',
+        duration: 'Durasi bervariasi per program, biasanya berkisar dari workshop setengah hari hingga seminar beberapa hari.',
+        pricing: 'Harga berdasarkan panjang program dan kustomisasi. Hubungi kami untuk kutipan rinci.',
         benefits: [
-            'Enhanced Communication Skills',
-            'Improved Team Collaboration and Conflict Resolution',
-            'Effective Stress Management Techniques',
-            'Increased Confidence in Public Speaking and Persuasion'
+            { title: 'Peningkatan Keterampilan Komunikasi', description: 'Menguasai teknik komunikasi yang efektif untuk lingkungan profesional.', icon: Brain },
+            { title: 'Kolaborasi Tim yang Lebih Baik', description: 'Memperkuat kerjasama tim dan meningkatkan kemampuan resolusi konflik.', icon: Users },
+            { title: 'Teknik Manajemen Stres', description: 'Pelajari cara mengelola stres untuk keseimbangan kerja dan kehidupan.', icon: Weight },
+            { title: 'Kepercayaan Berbicara di Publik', description: 'Meningkatkan kepercayaan diri dalam berbicara di depan umum dan teknik persuasi.', icon: Mic }
         ],
         faqs: [
             {
-                question: 'What training programs are offered?',
-                answer: 'We offer a range of programs including Effective Communication, Team Leadership, Persuasive Public Speaking, Stress Management, and Conflict Resolution.'
+                question: 'Program pelatihan apa saja yang ditawarkan?',
+                answer: 'Kami menawarkan berbagai program termasuk Komunikasi Efektif, Kepemimpinan Tim, Berbicara di Publik yang Persuasif, Manajemen Stres, dan Resolusi Konflik.'
             },
             {
-                question: 'Can programs be customized for specific team needs?',
-                answer: 'Absolutely. We work closely with you to understand your team’s unique dynamics and tailor our programs to meet these specific requirements.'
+                question: 'Apakah program dapat disesuaikan untuk kebutuhan tim tertentu?',
+                answer: 'Tentu saja. Kami bekerja sama dengan Anda untuk memahami dinamika unik tim Anda dan menyesuaikan program kami untuk memenuhi kebutuhan spesifik tersebut.'
             },
             {
-                question: 'Are the training programs suitable for all levels of employees?',
-                answer: 'Yes, our programs are designed to benefit everyone from new hires to seasoned executives. We adjust the content and approach to suit the audience’s experience level.'
+                question: 'Apakah program pelatihan cocok untuk semua tingkat karyawan?',
+                answer: 'Ya, program kami dirancang untuk memberi manfaat kepada semua orang mulai dari karyawan baru hingga eksekutif berpengalaman. Kami menyesuaikan konten dan pendekatan untuk sesuai dengan tingkat pengalaman audiens.'
             },
-            // ... more FAQs
+            {
+                question: 'Apa yang harus saya lakukan jika saya merasa pelatihan tidak akan efektif untuk saya?',
+                answer: 'Pelatihan dirancang untuk dapat disesuaikan dengan berbagai gaya belajar dan kebutuhan. Kami akan bekerja dengan Anda untuk memastikan bahwa materi dan metode pelatihan kami sesuai dengan cara Anda belajar terbaik dan memberikan dukungan yang Anda butuhkan untuk berhasil.'
+            },
+            {
+                question: 'Saya khawatir tidak akan bisa mengaplikasikan apa yang dipelajari dalam pelatihan ke pekerjaan saya sehari-hari. Bagaimana Anda menangani ini?',
+                answer: 'Pelatihan kami berfokus pada penerapan praktis. Selain menyediakan teori, kami juga memastikan bahwa Anda memiliki kesempatan untuk berlatih dan mengembangkan keterampilan tersebut melalui studi kasus, simulasi, dan kegiatan interaktif yang relevan dengan situasi kerja Anda.'
+            },
+            {
+                question: 'Bagaimana jika saya merasa tidak memiliki waktu untuk pelatihan?',
+                answer: 'Kami memahami bahwa karyawan sering kali memiliki jadwal yang padat, jadi kami menawarkan pelatihan dalam berbagai format, termasuk sesi singkat, modul online, dan pelatihan intensif untuk memastikan bahwa pelatihan dapat diakses oleh semua orang, tidak peduli seberapa sibuk jadwal mereka.'
+            },
+            {
+                question: 'Bagaimana jika saya takut pelatihan akan membosankan atau tidak relevan?',
+                answer: 'Kami berkomitmen untuk membuat pelatihan kami menarik dan relevan. Instruktur kami adalah ahli di bidangnya dan menggunakan metode pengajaran yang menarik untuk memastikan bahwa setiap peserta tetap terlibat dan mendapatkan manfaat maksimal dari pengalaman pelatihan mereka.'
+            },
         ],
     },
 
     coaching: {
         title: 'Coaching',
-        description: 'Our coaching services are designed to provide personalized, one-on-one support tailored to your unique goals and challenges. Whether you’re navigating career transitions, seeking personal development, or tackling specific professional hurdles, our coaching sessions offer a space for growth and self-discovery.',
-        process: 'Our coaching methodology is client-centered and goal-oriented. We start with a comprehensive assessment to understand your objectives and challenges. Sessions are then structured around these goals, using a mix of guided conversations, reflective exercises, and action planning. Our approach is adaptive, evolving with your progress and insights.',
-        duration: 'Programs typically span 6 months, with the flexibility to extend based on individual needs. Each session lasts about an hour, held bi-weekly or monthly.',
-        pricing: 'Pricing starts from $200 per month, with packages customizable to the frequency and duration of sessions.',
+        description: 'Layanan coaching kami dirancang untuk memberikan dukungan satu-satu yang dipersonalisasi dan disesuaikan dengan tujuan dan tantangan unik Anda. Apakah Anda sedang menghadapi transisi karir, mencari pengembangan pribadi, atau mengatasi hambatan profesional tertentu, sesi pelatihan kami menawarkan ruang untuk pertumbuhan dan penemuan diri.',
+        process: 'Metodologi pelatihan kami berpusat pada klien dan berorientasi pada tujuan. Kami memulai dengan penilaian komprehensif untuk memahami tujuan dan tantangan Anda. Sesi kemudian disusun mengelilingi tujuan-tujuan ini, menggunakan campuran percakapan terbimbing, latihan reflektif, dan perencanaan tindakan. Pendekatan kami adaptif, berkembang dengan kemajuan dan wawasan Anda.',
+        duration: 'Program biasanya berlangsung selama 6 bulan, dengan fleksibilitas untuk diperpanjang berdasarkan kebutuhan individu. Setiap sesi berlangsung sekitar satu jam, diadakan dua minggu sekali atau bulanan.',
+        pricing: 'Harga mulai dari $200 per bulan, dengan paket yang dapat disesuaikan dengan frekuensi dan durasi sesi.',
         benefits: [
-            'Tailored Strategies for Personal and Professional Development',
-            'Enhanced Self-Awareness and Decision-Making Skills',
-            'Structured Support in Achieving Specific Goals',
-            'Tools and Techniques for Long-Term Success and Fulfillment'
+            { title: 'Strategi Pengembangan Pribadi', description: 'Strategi khusus untuk pertumbuhan pribadi dan profesional.', icon: Presentation },
+            { title: 'Kesadaran Diri yang Meningkat', description: 'Meningkatkan kesadaran diri dan keterampilan pengambilan keputusan.', icon: Radio },
+            { title: 'Dukungan Pencapaian Tujuan', description: 'Bantuan terstruktur dalam mencapai tujuan spesifik Anda.', icon: Target },
+            { title: 'Teknik Sukses Jangka Panjang', description: 'Alat dan teknik untuk kesuksesan dan kepuasan jangka panjang.', icon: PenTool }
         ],
         faqs: [
             {
-                question: 'What is the focus of your coaching?',
-                answer: 'Our coaching focuses on empowering you to achieve your personal and professional goals, providing support in areas such as career development, leadership skills, and personal growth.'
+                question: 'Apa fokus dari coaching Anda?',
+                answer: 'Pelatihan kami berfokus pada memberdayakan Anda untuk mencapai tujuan pribadi dan profesional, menyediakan dukungan dalam area seperti pengembangan karir, keterampilan kepemimpinan, dan pertumbuhan pribadi.'
             },
             {
-                question: 'How do I know if coaching is right for me?',
-                answer: 'Coaching is beneficial if you are seeking structured and personalized support to achieve specific goals or navigate life’s challenges. It’s ideal for those who are ready to take proactive steps towards personal and professional growth.'
+                question: 'Bagaimana saya tahu jika coaching cocok untuk saya?',
+                answer: 'coaching bermanfaat jika Anda mencari dukungan yang terstruktur dan personal untuk mencapai tujuan tertentu atau menghadapi tantangan hidup. Ini ideal bagi mereka yang siap mengambil langkah proaktif menuju pertumbuhan pribadi dan profesional.'
             },
             {
-                question: 'What is the difference between coaching and therapy?',
-                answer: 'While both coaching and therapy can facilitate personal development, coaching is more focused on goal-setting and future-oriented growth, whereas therapy often deals with healing and resolving past issues.'
+                question: 'Apa perbedaan antara coaching dan terapi?',
+                answer: 'Meskipun baik coaching maupun terapi dapat memfasilitasi pengembangan pribadi, coaching lebih berfokus pada penetapan tujuan dan pertumbuhan yang berorientasi masa depan, sedangkan terapi sering kali berurusan dengan penyembuhan dan menyelesaikan masalah masa lalu.'
             },
-            // ... more FAQs
+            {
+                question: 'Apa yang mungkin menghambat saya dari mengikuti coaching?',
+                answer: 'Banyak orang merasa ragu untuk memulai coaching karena takut akan perubahan atau tidak yakin jika investasi waktu dan biaya akan membuahkan hasil. Kami menjamin pendekatan yang disesuaikan dan mendukung untuk membantu Anda melampaui hambatan dan mencapai potensi penuh Anda.'
+            },
+            {
+                question: 'Bagaimana jika saya tidak yakin tujuan yang ingin saya capai dengan coaching?',
+                answer: 'Tidak masalah jika Anda belum jelas tentang tujuan Anda. Bagian dari proses coaching adalah membantu Anda menentukan dan mempertajam tujuan Anda. Kami akan bekerja bersama Anda untuk mengidentifikasi apa yang paling penting bagi Anda dan bagaimana mencapainya.'
+            },
+            {
+                question: 'Saya khawatir tidak memiliki cukup waktu untuk coaching. Bagaimana ini bisa diatasi?',
+                answer: 'Kami memahami bahwa waktu adalah aset berharga, dan itulah sebabnya kami menawarkan fleksibilitas dalam penjadwalan sesi. Coaching efektif bisa dilakukan dalam sesi yang lebih pendek tetapi konsisten, dan kami akan menyesuaikan rencana sesuai dengan ketersediaan Anda.'
+            },
+            {
+                question: 'Bagaimana jika saya tidak nyaman membahas masalah pribadi atau profesional dengan pelatih?',
+                answer: 'Kerahasiaan dan kenyamanan Anda adalah prioritas kami. Anda akan selalu memiliki kendali atas apa yang Anda ingin diskusikan, dan kami menyediakan lingkungan yang aman dan mendukung untuk setiap sesi coaching.'
+            },
         ],
     },
 
@@ -147,82 +185,115 @@ const serviceDetails: Record<string, ServiceDetail> = {
 const servicePricing: ServicePricing = {
     hipnoterapi: [
         {
-            title: "Starter Package",
-            monthlyPrice: 80,
-            yearlyPrice: 800,
-            description: "Ideal for those new to hypnotherapy.",
-            features: ["Basic Hypnotherapy Sessions", "Initial Consultation", "Customized Hypnosis Plan"],
-            actionLabel: "Get Started",
+            title: "Paket Pemula",
+            pricePerSession: 300000, // IDR, adjust as necessary
+            description: "Ideal bagi mereka yang baru mengenal hipnoterapi.",
+            features: [
+                "Sesi Hipnoterapi Dasar",
+                "Konsultasi Awal",
+                "Rencana Hipnosis yang Disesuaikan",
+                "Durasi Sesi: 1 Jam"
+            ],
+            actionLabel: "Mulai Sekarang",
         },
         {
-            title: "Advanced Package",
-            monthlyPrice: 150,
-            yearlyPrice: 1500,
-            description: "Advanced sessions for deeper work.",
-            features: ["Advanced Techniques", "Follow-up Consultations", "Extended Session Time"],
-            actionLabel: "Get Started",
+            title: "Paket Lanjutan",
+            pricePerSession: 500000, // IDR, adjust as necessary
+            description: "Sesi lanjutan untuk pekerjaan yang lebih dalam.",
+            features: [
+                "Teknik Lanjutan",
+                "Konsultasi Tindak Lanjut",
+                "Waktu Sesi yang Lebih Lama",
+                "Durasi Sesi: 1,5 Jam"
+            ],
+            actionLabel: "Mulai Sekarang",
             popular: true,
         },
         {
-            title: "Pro Package",
-            price: "Custom",
-            description: "Comprehensive, ongoing hypnotherapy support.",
-            features: ["Unlimited Sessions", "Priority Scheduling", "Continuous Support"],
-            actionLabel: "Contact for Quote",
+            title: "Paket Pro",
+            pricePerSession: "Custom", // IDR, adjust as necessary for custom pricing
+            description: "Dukungan hipnoterapi komprehensif dan berkelanjutan.",
+            features: [
+                "Sesi Tanpa Batas",
+                "Penjadwalan Prioritas",
+                "Dukungan Berkelanjutan",
+                "Durasi Sesi: Disesuaikan"
+            ],
+            actionLabel: "Hubungi untuk Penawaran",
             exclusive: true,
         },
     ],
     training: [
         {
-            title: "Basic Training",
-            monthlyPrice: 100,
-            yearlyPrice: 1000,
-            description: "Essential skills for effective communication and team work.",
-            features: ["Communication Skills", "Team Collaboration", "Conflict Resolution"],
-            actionLabel: "Get Started",
+            title: "Pelatihan Dasar",
+            pricePerSession: 1000000, // Assuming this is the price per session in IDR
+            description: "Keterampilan dasar untuk komunikasi dan kerja tim yang efektif.",
+            features: [
+                "Keterampilan Komunikasi",
+                "Kolaborasi Tim",
+                "Resolusi Konflik"
+            ],
+            actionLabel: "Mulai Sekarang",
         },
         {
-            title: "Professional Training",
-            monthlyPrice: 200,
-            yearlyPrice: 2000,
-            description: "In-depth training for leadership and management.",
-            features: ["Leadership Skills", "Advanced Communication Techniques", "Stress Management"],
-            actionLabel: "Get Started",
+            title: "Pelatihan Profesional",
+            pricePerSession: 2000000, // Assuming this is the price per session in IDR
+            description: "Pelatihan mendalam untuk kepemimpinan dan manajemen.",
+            features: [
+                "Keterampilan Kepemimpinan",
+                "Teknik Komunikasi Lanjutan",
+                "Manajemen Stres"
+            ],
+            actionLabel: "Mulai Sekarang",
             popular: true,
         },
         {
-            title: "Executive Training",
-            price: "Custom",
-            description: "Tailored training programs for high-level executive needs.",
-            features: ["Customized Training Modules", "One-on-One Coaching", "Ongoing Support"],
-            actionLabel: "Contact for Quote",
+            title: "Pelatihan Eksekutif",
+            pricePerSession: "Custom", // Use "Custom" for tailored pricing
+            description: "Program pelatihan yang disesuaikan untuk kebutuhan eksekutif tingkat tinggi.",
+            features: [
+                "Modul Pelatihan Disesuaikan",
+                "Coaching Satu-satu",
+                "Dukungan Berkelanjutan"
+            ],
+            actionLabel: "Hubungi untuk Penawaran",
             exclusive: true,
         },
     ],
     coaching: [
         {
-            title: "Personal Coaching",
-            monthlyPrice: 120,
-            yearlyPrice: 1200,
-            description: "Individualized coaching for personal development and goal achievement.",
-            features: ["Goal Setting", "Personal Growth Strategies", "Accountability Sessions"],
-            actionLabel: "Get Started",
+            title: "Coaching Pribadi",
+            pricePerSession: 1200000, // Assuming this is the price per session in IDR
+            description: "Coaching individual untuk pengembangan pribadi dan pencapaian tujuan.",
+            features: [
+                "Penetapan Tujuan",
+                "Strategi Pengembangan Pribadi",
+                "Sesi Akuntabilitas"
+            ],
+            actionLabel: "Mulai Sekarang",
         },
         {
-            title: "Professional Coaching",
-            monthlyPrice: 250,
-            yearlyPrice: 2500,
-            description: "Focused coaching for professional development and career advancement.",
-            features: ["Career Planning", "Professional Skill Development", "Performance Enhancement"],
-            actionLabel: "Get Started",
+            title: "Coaching Profesional",
+            pricePerSession: 2500000, // Assuming this is the price per session in IDR
+            description: "Coaching terfokus untuk pengembangan profesional dan kemajuan karir.",
+            features: [
+                "Perencanaan Karir",
+                "Pengembangan Keterampilan Profesional",
+                "Peningkatan Kinerja"
+            ],
+            actionLabel: "Mulai Sekarang",
             popular: true,
         },
         {
-            title: "Executive Coaching",
-            price: "Custom",
-            description: "High-level coaching for executives and business leaders.",
-            features: ["Strategic Planning", "Leadership Development", "Exclusive Resources"],
-            actionLabel: "Contact for Quote",
+            title: "Coaching Eksekutif",
+            pricePerSession: "Custom", // Use "Custom" for tailored pricing
+            description: "Coaching tingkat tinggi untuk eksekutif dan pemimpin bisnis.",
+            features: [
+                "Perencanaan Strategis",
+                "Pengembangan Kepemimpinan",
+                "Sumber Daya Eksklusif"
+            ],
+            actionLabel: "Hubungi untuk Penawaran",
             exclusive: true,
         },
     ],
@@ -255,20 +326,8 @@ const PricingHeader = ({ title, subtitle }: { title: string; subtitle: string })
     </section>
 )
 
-const PricingSwitch = ({ onSwitch }: PricingSwitchProps) => (
-    <Tabs defaultValue="0" className="w-40 mx-auto" onValueChange={onSwitch}>
-        <TabsList className="py-6 px-2">
-            <TabsTrigger value="0" className="text-base">
-                Monthly
-            </TabsTrigger>
-            <TabsTrigger value="1" className="text-base">
-                Yearly
-            </TabsTrigger>
-        </TabsList>
-    </Tabs>
-)
 
-const PricingCard = ({ isYearly, title, monthlyPrice, yearlyPrice, description, features, actionLabel, popular, exclusive }: PricingCardProps) => (
+const PricingCard = ({ title, pricePerSession, description, features, actionLabel, popular, exclusive }: PricingPlan) => (
     <Card
         className={cn(`w-72 flex flex-col justify-between py-1 ${popular ? "border-rose-400" : "border-zinc-700"} mx-auto sm:mx-0`, {
             "animate-background-shine bg-white dark:bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] transition-colors":
@@ -276,22 +335,15 @@ const PricingCard = ({ isYearly, title, monthlyPrice, yearlyPrice, description, 
         })}>
         <div>
             <CardHeader className="pb-8 pt-4">
-                {isYearly && yearlyPrice && monthlyPrice ? (
-                    <div className="flex justify-between">
-                        <CardTitle className="text-zinc-700 dark:text-zinc-300 text-lg">{title}</CardTitle>
-                        <div
-                            className={cn("px-2.5 rounded-xl h-fit text-sm py-1 bg-zinc-200 text-black dark:bg-zinc-800 dark:text-white", {
-                                "bg-gradient-to-r from-orange-400 to-rose-400 dark:text-black ": popular,
-                            })}>
-                            Save ${monthlyPrice * 12 - yearlyPrice}
-                        </div>
-                    </div>
-                ) : (
-                    <CardTitle className="text-zinc-700 dark:text-zinc-300 text-lg">{title}</CardTitle>
-                )}
+                <CardTitle className="text-zinc-700 dark:text-zinc-300 text-lg">{title}</CardTitle>
                 <div className="flex gap-0.5">
-                    <h3 className="text-3xl font-bold">{yearlyPrice && isYearly ? "$" + yearlyPrice : monthlyPrice ? "$" + monthlyPrice : "Custom"}</h3>
-                    <span className="flex flex-col justify-end text-sm mb-1">{yearlyPrice && isYearly ? "/year" : monthlyPrice ? "/month" : null}</span>
+                    <div className="flex gap-0.5">
+                        <h3 className="text-3xl font-bold">
+                            {typeof pricePerSession === 'number' ? `Rp${pricePerSession.toLocaleString('id-ID')}` : pricePerSession}
+                        </h3>
+                        {typeof pricePerSession === 'number' && <span className="flex flex-col justify-end text-sm mb-1">/sesi</span>}
+                    </div>
+                    {/* <span className="flex flex-col justify-end text-sm mb-1">/sesi</span> */}
                 </div>
                 <CardDescription className="pt-1.5 h-12">{description}</CardDescription>
             </CardHeader>
@@ -302,13 +354,14 @@ const PricingCard = ({ isYearly, title, monthlyPrice, yearlyPrice, description, 
             </CardContent>
         </div>
         <CardFooter className="mt-2">
-            <Button className="relative inline-flex w-full items-center justify-center rounded-md bg-black text-white dark:bg-white px-6 font-medium  dark:text-black transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50">
-                <div className="absolute -inset-0.5 -z-10 rounded-lg bg-gradient-to-b from-[#c7d2fe] to-[#8678f9] opacity-75 blur" />
-                {actionLabel}
+            <Button asChild className="relative inline-flex w-full items-center justify-center rounded-md bg-black text-white dark:bg-white px-6 font-medium  dark:text-black transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50">
+                {/* <div className="absolute -inset-0.5 -z-10 rounded-lg bg-gradient-to-b from-[#c7d2fe] to-[#8678f9] opacity-75 blur" /> */}
+                <Link href={BookSession}>{actionLabel}</Link>
             </Button>
         </CardFooter>
     </Card>
-)
+);
+
 
 const CheckItem = ({ text }: { text: string }) => (
     <div className="flex gap-2">
@@ -347,33 +400,59 @@ export default function ServicePage() {
                     <h1 className="text-4xl font-bold text-start mb-6">{details.title}</h1>
                     <p>{details.description}</p>
                 </div>
-                <h2 className="text-lg font-semibold mt-4">Process</h2>
+                {/* CTA Section */}
+                <section className="text-start py-4">
+                    <h2 className="text-md text-stone-600 font-normal mb-3">{`Siap untuk transformasi hidup Anda? Temukan keseimbangan dan kedamaian pikiran yang Anda cari.`}</h2>
+                    <Button asChild className="inline-flex items-center justify-center px-6 py-3 bg-purple-600 text-white font-medium rounded-md hover:bg-purple-700">
+                        <Link href={BookSession}>Jadwalkan Konsultasi Gratis</Link>
+                    </Button>
+                </section>
+
+             
+                <h2 className="text-lg font-semibold mt-4">Proses Kami</h2>
                 <p>{details.process}</p>
-                <h2 className="text-lg font-semibold mt-4">Duration</h2>
-                <p>{details.duration}</p>
+                {/* <h2 className="text-lg font-semibold mt-4">Duration</h2> */}
+                {/* <p>{details.duration}</p> */}
+                <section className='py-12 rounded-lg px-6'>
+                    <div className=' text-center flex flex-col gap-2 mb-6'>
+                        <h2 className="text-3xl font-bold">Manfaat Pelatihan</h2>
+                        <p>Berikut Beberapa manfaat yang akan kamu dapatkan </p>
+                    </div>
+                    <div className="grid md:grid-cols-3 gap-6 text-start">
+                        {details.benefits.map((benefit, index) => (
+                            <Card key={index} className='bg-gradient-to-r from-green-100 to-green-200 '>
+                                <CardHeader>
+                                    <benefit.icon className="h-12 w-12 text-stone-950 my-4" />
+                                    <CardTitle>{benefit.title}</CardTitle>
+                                    <CardDescription>{benefit.description}</CardDescription>
+                                </CardHeader>
+
+
+                            </Card>
+
+                        ))}
+                    </div>
+                </section>
               <section className='py-12'>
-                    <PricingHeader title="Pricing Plans" subtitle={`Choose the plan that's right for you in ${service}`} />
-                    <PricingSwitch onSwitch={(value) => setIsYearly(parseInt(value) === 1)} />
+                    <PricingHeader title="Paket Harga" subtitle={`Pilih paket yang tepat untuk ${details.title} Anda  `} />
+
+
                     <section className="flex flex-col sm:flex-row sm:flex-wrap justify-center gap-8 mt-8">
-                        {plans.map((plan: JSX.IntrinsicAttributes & PricingCardProps) => (
-                            <PricingCard key={plan.title} {...plan} isYearly={isYearly} />
+                        {plans.map((plan: JSX.IntrinsicAttributes & PricingPlan) => (
+                            <PricingCard key={plan.title} {...plan} />
                         ))}
                     </section>
               </section>
-                <h2 className="text-lg font-semibold mt-4">Benefits</h2>
-                <ul>
-                    {details.benefits.map((benefit, index) => (
-                        <li key={index}>{benefit}</li>
-                    ))}
-                </ul>
-               <div className='py-12'>
+
+
+               <div className='py-4'>
                     <h2 className="text-2xl font-semibold mt-4">FAQs</h2>
     
                     <Accordion type="single" collapsible className="w-full">
                         {details.faqs.map((faq, index) => (
     
                             <AccordionItem value={`${index}`} key={index}>
-                                <AccordionTrigger>{faq.question}</AccordionTrigger>
+                                <AccordionTrigger className='text-start'>{faq.question}</AccordionTrigger>
                                 <AccordionContent>
                                     {faq.answer}
                                 </AccordionContent>
@@ -383,6 +462,13 @@ export default function ServicePage() {
                     </Accordion>
     
                </div>
+                <section className="bg-indigo-700 text-white text-center p-8 my-12 rounded-lg mb-12">
+                    <h2 className="text-3xl font-bold mb-4">Siap Untuk Transformasi?</h2>
+                    <p className="mb-6">Jelajahi berbagai layanan kami dan mulai perjalanan Anda menuju pertumbuhan pribadi.</p>
+                    <Button asChild className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm w-fit text-white bg-stone-950 hover:bg-stone-100 hover:text-stone-950">
+                        <Link href={BookSession}>Jadwalkan Konsultasi</Link>
+                    </Button>
+                </section>
             </div>
         </Layout>
     );
