@@ -49,7 +49,7 @@ export default function Home() {
         <div className="flex flex-col lg:flex-row items-center py-12 md:py-24">
           <div className="lg:w-1/2">
             <h1 className="text-3xl md:text-4xl font-bold text-stone-800 mb-3">
-              Menguatkan Hidup Anda dengan Layanan Kami
+              Tingkatkan Kualitas <br /> Hidup Anda 
             </h1>
             <p className="text-stone-600 mb-6">
               Temukan pengalaman transformatif melalui hipnoterapi, pelatihan keterampilan hidup, dan coaching pribadi.
@@ -59,11 +59,10 @@ export default function Home() {
               <Link href={BookSession} className="text-white">Jadwalkan Konsultasi</Link>
             </Button>
           </div>
-          <div className="lg:w-1/2 mt-6 lg:mt-0 aspect-w-9 aspect-h-16">
+          <div className="lg:w-1/2 mt-6 lg:mt-0 aspect-video rounded-lg">
             <iframe
-              src="https://www.instagram.com/reel/C0l5NULr2iS/embed"
-              width="400"
-              height="500"
+              src="https://www.youtube.com/embed/MOCU0uT7mSg"
+              className='w-full h-full rounded-lg'
               frameBorder="0"
               allowFullScreen>
             </iframe>

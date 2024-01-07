@@ -1,9 +1,20 @@
 import Marquee from 'react-fast-marquee';
 import Image from 'next/image';
+import { useEffect, useState } from 'react';
+
 
 export default function Clients() {
     // Array of logo URLs - replace these with actual client logo URLs
-    const logos = new Array(10).fill('https://source.unsplash.com/random/?logo,brand');
+    // const logos = new Array(10).fill('https://source.unsplash.com/random/?logo,brand');
+    const [logos, setLogos] = useState<string[]>([]);
+
+    useEffect(() => {
+        fetch('/api/logos')
+            .then(response => response.json())
+            .then(data => setLogos(data.logos))
+            .catch(error => console.error('Error fetching logos:', error));
+    }, []);
+
 
     return (
 
