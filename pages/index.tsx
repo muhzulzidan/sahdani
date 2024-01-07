@@ -9,18 +9,45 @@ import { Button  } from '@/components/ui/button';
 import { Shell, Brain, Cpu } from 'lucide-react'; // Replace these with actual icons
 import Link from 'next/link';
 import sahdani from "@/public/images/sahdani.jpg"
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
 const BookSession = "https://wa.me/6285179561643";
 
 export default function Home() {
-  const testimonials = [
+const testimonials = [
     {
-      name: 'Nama Klien 1',
-      photo: 'https://source.unsplash.com/random/?person', // Ganti dengan foto klien yang sebenarnya
-      feedback: 'Sesi hipnoterapi telah memberikan transformasi. Saya menemukan kejelasan dan tujuan baru dalam hidup.'
+        name: "Aisyah, Guru",
+        feedback: "Sesi hipnoterapi dengan Pak Sahdani benar-benar mengubah cara saya menghadapi kecemasan. Teknik yang beliau gunakan sangat efektif, dan saya merasa lebih tenang dan terkendali. Terima kasih, Pak Sahdani!",
+    photo: "https://source.unsplash.com/random/?avatar" // Replace with actual path
     },
-    // ... lebih banyak testimoni
-  ];
+    {
+        name: "Budi, Badminton",
+        feedback: "Sebagai seorang atlet, konsentrasi dan fokus adalah segalanya buat saya. Hipnoterapi dengan Pak Sahdani membantu saya meningkatkan kinerja saya secara signifikan. Saya merasa lebih fokus dan termotivasi.",
+      photo: "https://source.unsplash.com/random/?avatar" // Replace with actual path
+    },
+    {
+        name: "Rindi, Public Relations",
+        feedback: "Saya selalu takut berbicara di depan umum. Setelah beberapa sesi dengan Mas Sahdani, saya merasa lebih percaya diri. Kini, saya bisa berbicara di depan banyak orang tanpa rasa takut yang menghantui.",
+      photo: "https://source.unsplash.com/random/?avatar" // Replace with actual path
+    },
+    {
+        name: "Hidayat, Eksekutif Perusahaan",
+        feedback: "Pekerjaan saya sebagai eksekutif perusahaan sangat menuntut. Tekanan dan stres menjadi bagian hari-hari saya. Berkat hipnoterapi, saya kini bisa mengelola stres dengan lebih baik. Pak Sahdani benar-benar membantu saya menemukan keseimbangan dalam bekerja.",
+      photo: "https://source.unsplash.com/random/?avatar" // Replace with actual path
+    },
+    {
+        name: "Erika, Desainer Interior",
+        feedback: "Setelah bercerai, saya merasa sangat down dan tidak bersemangat. Hipnoterapi dengan Mas Sahdani membantu saya melewati masa sulit dan menemukan kebahagiaan kembali. Terima kasih atas dukungan dan bimbingannya.",
+      photo: "https://source.unsplash.com/random/?avatar" // Replace with actual path
+    }
+];
   const services = [
     {
       name: 'Hipnoterapi',
@@ -41,6 +68,8 @@ export default function Home() {
       link: '/services/coaching'
     }
   ];
+
+  
   return (
     <Layout>
       <div className="bg-stone-100 container">
@@ -146,20 +175,32 @@ export default function Home() {
                 <CardTitle>Apa Kata Klien Kami</CardTitle>
                 <CardDescription>Dengarkan dari mereka yang telah mengalami perubahan secara langsung.</CardDescription>
               </CardHeader>
-              <CardContent className="grid gap-4">
-                {testimonials.map((testimonial, index) => (
-                  <div key={index} className="flex flex-col items-center space-y-2 p-4">
-                    <Image
-                      src={testimonial.photo}
-                      alt={testimonial.name}
-                      width={100}
-                      height={100}
-                      className="rounded-full"
-                    />
-                    <p className="text-sm text-center">{testimonial.feedback}</p>
-                    <p className="text-sm font-medium">{testimonial.name}</p>
-                  </div>
-                ))}
+              <CardContent>
+                <Carousel className='w-full'>
+                  <CarouselContent className=''>
+                    {testimonials.map((testimonial, index) => (
+                      <CarouselItem key={index} className='flex flex-col justify-center items-center'>
+                        <div className="flex flex-col justify-center items-center gap-2 p-4 px-24">
+                          
+                          {/* <Avatar>
+                            <Image
+                              src={testimonial.photo}
+                              alt={testimonial.name}
+                              width={100}
+                              height={100}
+                              className="rounded-full"
+                            />
+                          </Avatar> */}
+
+                          <p className="text-lg mb-2 text-center">{testimonial.feedback}</p>
+                          <p className="text-lg text-stone-600 font-bold">{testimonial.name}</p>
+                        </div>
+                      </CarouselItem>
+                    ))}
+                  </CarouselContent>
+                  <CarouselPrevious className='left-0'/>
+                  <CarouselNext className='right-0' />
+                </Carousel>
               </CardContent>
               <CardFooter>
                 {/* Footer content if needed */}

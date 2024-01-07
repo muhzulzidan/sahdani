@@ -224,29 +224,29 @@ const servicePricing: ServicePricing = {
         },
     ],
     training: [
-        {
-            title: "Pelatihan Dasar",
-            pricePerSession: 1000000, // Assuming this is the price per session in IDR
-            description: "Keterampilan dasar untuk komunikasi dan kerja tim yang efektif.",
-            features: [
-                "Keterampilan Komunikasi",
-                "Kolaborasi Tim",
-                "Resolusi Konflik"
-            ],
-            actionLabel: "Mulai Sekarang",
-        },
-        {
-            title: "Pelatihan Profesional",
-            pricePerSession: 2000000, // Assuming this is the price per session in IDR
-            description: "Pelatihan mendalam untuk kepemimpinan dan manajemen.",
-            features: [
-                "Keterampilan Kepemimpinan",
-                "Teknik Komunikasi Lanjutan",
-                "Manajemen Stres"
-            ],
-            actionLabel: "Mulai Sekarang",
-            popular: true,
-        },
+        // {
+        //     title: "Pelatihan Dasar",
+        //     pricePerSession: 1000000, // Assuming this is the price per session in IDR
+        //     description: "Keterampilan dasar untuk komunikasi dan kerja tim yang efektif.",
+        //     features: [
+        //         "Keterampilan Komunikasi",
+        //         "Kolaborasi Tim",
+        //         "Resolusi Konflik"
+        //     ],
+        //     actionLabel: "Mulai Sekarang",
+        // },
+        // {
+        //     title: "Pelatihan Profesional",
+        //     pricePerSession: 2000000, // Assuming this is the price per session in IDR
+        //     description: "Pelatihan mendalam untuk kepemimpinan dan manajemen.",
+        //     features: [
+        //         "Keterampilan Kepemimpinan",
+        //         "Teknik Komunikasi Lanjutan",
+        //         "Manajemen Stres"
+        //     ],
+        //     actionLabel: "Mulai Sekarang",
+        //     popular: true,
+        // },
         {
             title: "Pelatihan Eksekutif",
             pricePerSession: "Custom", // Use "Custom" for tailored pricing
@@ -261,29 +261,29 @@ const servicePricing: ServicePricing = {
         },
     ],
     coaching: [
-        {
-            title: "Coaching Pribadi",
-            pricePerSession: 1200000, // Assuming this is the price per session in IDR
-            description: "Coaching individual untuk pengembangan pribadi dan pencapaian tujuan.",
-            features: [
-                "Penetapan Tujuan",
-                "Strategi Pengembangan Pribadi",
-                "Sesi Akuntabilitas"
-            ],
-            actionLabel: "Mulai Sekarang",
-        },
-        {
-            title: "Coaching Profesional",
-            pricePerSession: 2500000, // Assuming this is the price per session in IDR
-            description: "Coaching terfokus untuk pengembangan profesional dan kemajuan karir.",
-            features: [
-                "Perencanaan Karir",
-                "Pengembangan Keterampilan Profesional",
-                "Peningkatan Kinerja"
-            ],
-            actionLabel: "Mulai Sekarang",
-            popular: true,
-        },
+        // {
+        //     title: "Coaching Pribadi",
+        //     pricePerSession: 1200000, // Assuming this is the price per session in IDR
+        //     description: "Coaching individual untuk pengembangan pribadi dan pencapaian tujuan.",
+        //     features: [
+        //         "Penetapan Tujuan",
+        //         "Strategi Pengembangan Pribadi",
+        //         "Sesi Akuntabilitas"
+        //     ],
+        //     actionLabel: "Mulai Sekarang",
+        // },
+        // {
+        //     title: "Coaching Profesional",
+        //     pricePerSession: 2500000, // Assuming this is the price per session in IDR
+        //     description: "Coaching terfokus untuk pengembangan profesional dan kemajuan karir.",
+        //     features: [
+        //         "Perencanaan Karir",
+        //         "Pengembangan Keterampilan Profesional",
+        //         "Peningkatan Kinerja"
+        //     ],
+        //     actionLabel: "Mulai Sekarang",
+        //     popular: true,
+        // },
         {
             title: "Coaching Eksekutif",
             pricePerSession: "Custom", // Use "Custom" for tailored pricing
