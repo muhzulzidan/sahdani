@@ -1,46 +1,37 @@
-// Import necessary components and icons
-// import { Container, Navbar, Button } from '@shadcn/ui';
-import { Navbar } from 'flowbite-react';
-
-import { Button } from './ui/button';
-import { Coffee } from 'lucide-react';
 import Link from 'next/link';
+import { Button } from './ui/button';
 
 const BookSession = "https://wa.me/6285179561643";
 
 export default function Header() {
     return (
-        <Navbar className='sticky top-0 z-50'>
-            <nav className="flex justify-between items-center w-full">
+        <nav className="bg-stone-800 text-white sticky top-0 z-50">
+            <div className="container mx-auto p-4">
+                <div className="flex justify-between items-center">
 
-                <Navbar.Brand as={Link} href='/'>
-                    {/* <Coffee className="mr-2 h-6 w-6" /> */}
-                    Sahdani
-                </Navbar.Brand>
+                    <Link href='/' passHref>
+                        <span>Sahdani</span>
+                    </Link>
 
-                <Navbar.Toggle />
-                <Navbar.Collapse>
-                    <Navbar.Link href="/" active>
-                        Beranda
-                    </Navbar.Link>
-                    {/* <Navbar.Link as={Link} href="/about">
-                        Tentang Kami
-                    </Navbar.Link> */}
-                    <Navbar.Link href="/services">
-                        Layanan Kami
-                    </Navbar.Link>
-                    {/* <Navbar.Link href="#">Pricing</Navbar.Link> */}
-                    {/* <Navbar.Link href="#">Contact</Navbar.Link> */}
-                </Navbar.Collapse>
-                
+                    <div className="hidden md:flex space-x-4">
+                        <Link href="/" passHref>
+                            Beranda
+                        </Link>
+                        <Link href="/services" passHref>
+                            Layanan Kami
+                        </Link>
+                        <Link href="/blogs" passHref>
+                            Blog
+                        </Link>
+                    </div>
 
                     <Button asChild className="ml-3 hidden md:flex">
-                        <Link href={BookSession} className="text-stone-100">
+                        <a href={BookSession} className="text-stone-100">
                             Konsultasikan
-                        </Link>
+                        </a>
                     </Button>
-
-            </nav>
-        </Navbar>
+                </div>
+            </div>
+        </nav>
     );
 }

@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://sahdani.id
+
+# Sitemaps
+Sitemap: https://sahdani.id/sitemap.xml

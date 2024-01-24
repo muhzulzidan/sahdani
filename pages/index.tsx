@@ -8,6 +8,8 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Button  } from '@/components/ui/button';
 import { Shell, Brain, Cpu } from 'lucide-react'; // Replace these with actual icons
 import Link from 'next/link';
+import { getAllPosts } from '../lib/posts';
+
 import sahdani from "@/public/images/sahdani.jpg"
 import {
   Carousel,
@@ -17,10 +19,25 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { GetStaticProps } from 'next';
+import SEO from '@/components/seo';
 
 const BookSession = "https://wa.me/6285179561643";
+interface Post {
+  slug: string;
+  title: string;
+  date: string;
+  content: string;
+}
 
-export default function Home() {
+interface HomeProps {
+  posts: Post[];
+}
+
+
+
+export default function Home({ posts }: HomeProps) {
+
 const testimonials = [
     {
         name: "Aisyah, Guru",
@@ -72,8 +89,8 @@ const testimonials = [
   
   return (
     <Layout>
+      <SEO title='Hipnoterapi Bone terdekat'  />
       <div className="bg-stone-100 container">
-
 
         <div className="flex flex-col lg:flex-row items-center py-12 md:py-24">
           <div className="lg:w-1/2">
@@ -111,7 +128,7 @@ const testimonials = [
         <Clients/>
 
         <div className="bg-stone-100 py-12">
-          <div className="container mx-auto px-4">
+          <div className="md:container mx-auto px-0 lg:px-4">
             <div className="text-center mb-8">
               <h2 className="text-3xl font-bold text-stone-800">Layanan Kami</h2>
               <p className="text-stone-600">Jelajahi berbagai layanan kami yang disesuaikan dengan kebutuhan Anda</p>
@@ -138,9 +155,9 @@ const testimonials = [
         </div>
 
         <div className="bg-stone-100 py-12">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
             <div className="flex justify-center">
-              {/* Replace with your image URL */}
+              {/* Ganti dengan URL gambar Anda */}
               <Image
                 src={sahdani}
                 alt="About Us"
@@ -166,10 +183,10 @@ const testimonials = [
               </Button>
             </div>
           </div>
-
         </div>
+
         <div className="py-12 bg-stone-100">
-          <div className="container mx-auto px-4">
+          <div className="container mx-auto px-0 lg:px-4">
             <Card className="w-full">
               <CardHeader>
                 <CardTitle>Apa Kata Klien Kami</CardTitle>
@@ -180,7 +197,7 @@ const testimonials = [
                   <CarouselContent className=''>
                     {testimonials.map((testimonial, index) => (
                       <CarouselItem key={index} className='flex flex-col justify-center items-center'>
-                        <div className="flex flex-col justify-center items-center gap-2 p-4 px-24">
+                        <div className="flex flex-col justify-center items-center gap-2 p-4 px-10  lg:px-24">
                           
                           {/* <Avatar>
                             <Image
@@ -192,8 +209,8 @@ const testimonials = [
                             />
                           </Avatar> */}
 
-                          <p className="text-lg mb-2 text-center">{testimonial.feedback}</p>
-                          <p className="text-lg text-stone-600 font-bold">{testimonial.name}</p>
+                          <p className="text-sm lg:text-lg mb-2 text-center">{testimonial.feedback}</p>
+                          <p className="text-sm lg:text-lg text-center lg:text-start text-stone-600 font-bold">{testimonial.name}</p>
                         </div>
                       </CarouselItem>
                     ))}
@@ -209,16 +226,16 @@ const testimonials = [
           </div>
         </div>
 
-        <div className="bg-stone-100 py-32">
+        <div className="bg-stone-900 text-stone-50 py-32 rounded-t-xl">
           <div className="container mx-auto text-center">
-            <h2 className="text-2xl font-bold text-stone-800 mb-3">Tertarik untuk Mengetahui Lebih Lanjut?</h2>
-            <p className="text-stone-600 mb-6">Temukan bagaimana layanan kami dapat mentransformasi hidup Anda.</p>
-           <div className='flex gap-4 justify-center items-center'>
+            <h2 className="text-2xl font-bold  mb-3">Tertarik untuk Mengetahui Lebih Lanjut?</h2>
+            <p className="text-stone-200 mb-6">Temukan bagaimana layanan kami dapat mentransformasi hidup Anda.</p>
+           <div className='flex flex-col md:flex-row gap-4 justify-center items-center'>
               <Button asChild className="">
                 <Link href={BookSession} className="text-stone-100">Pelajari Lebih Lanjut</Link>
               </Button>
-              <Button asChild variant={"outline"}>
-                <Link href={"/about"}>Baca Lebih Lanjut Tentang Kami</Link>
+              <Button className='text-stone-950' asChild variant={"outline"}>
+                <Link href={"/about"} >Baca Lebih Lanjut Tentang Kami</Link>
               </Button>
            </div>
           </div>
@@ -227,3 +244,7 @@ const testimonials = [
     </Layout>
   )
 }
+
+
+
+

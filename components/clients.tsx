@@ -30,6 +30,7 @@ export default function Clients() {
                             <a key={index} href="#" className="flex justify-center items-center rounded-xl p-6 w-[10rem] group">
                                 <Image 
                                     src={logo}
+                                    quality={100}
                                     alt={`Client Logo ${index + 1}`} 
                                     width={50} 
                                     height={50} 
