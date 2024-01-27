@@ -90,14 +90,14 @@ const testimonials = [
   return (
     <Layout>
       <SEO title='Hipnoterapi Bone terdekat'  />
-      <div className="bg-stone-100 container">
+      <div className="bg-stone-100 md:container px-2">
 
-        <div className="flex flex-col lg:flex-row items-center py-12 md:py-24">
-          <div className="lg:w-1/2">
-            <h1 className="text-3xl md:text-4xl font-bold text-stone-800 mb-3">
+        <div className="flex flex-col md:flex-row items-center py-12 md:py-24">
+          <div className="md:w-1/2">
+            <h1 className="text-3xl lg:text-4xl font-bold text-stone-800 mb-3">
               Tingkatkan Kualitas <br /> Hidup Anda 
             </h1>
-            <p className="text-stone-600 mb-6">
+            <p className="text-stone-600 mb-6 text-sm lg:text-base">
               Temukan pengalaman transformatif melalui hipnoterapi, pelatihan keterampilan hidup, dan coaching pribadi.
             </p>
            
@@ -105,7 +105,7 @@ const testimonials = [
               <Link href={BookSession} className="text-white">Jadwalkan Konsultasi</Link>
             </Button>
           </div>
-          <div className="lg:w-1/2 mt-6 lg:mt-0 aspect-video rounded-lg">
+          <div className="md:w-1/2 w-full mt-6 lg:mt-0 aspect-video rounded-lg">
             <iframe
               src="https://www.youtube.com/embed/MOCU0uT7mSg"
               className='w-full h-full rounded-lg'
@@ -134,7 +134,7 @@ const testimonials = [
               <p className="text-stone-600">Jelajahi berbagai layanan kami yang disesuaikan dengan kebutuhan Anda</p>
 
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {services.map((service, index) => (
                 <Card key={index}>
                   <CardHeader>

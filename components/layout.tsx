@@ -25,7 +25,7 @@ const Layout: React.FC<LayoutProps> = ({ children, showHeader = true, showFooter
             "min-h-screen bg-background font-sans antialiased bg-stone-100",
             fontSans.variable
         )}>
-            <Head>
+            {/* <Head>
                 <title>Hipnoterapi - Transformasi Kehidupan Anda</title>
                 <meta name="description" content="Temukan keseimbangan dan kedamaian pikiran dengan sesi hipnoterapi profesional kami. Jadwalkan konsultasi Anda hari ini." />
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -39,7 +39,7 @@ const Layout: React.FC<LayoutProps> = ({ children, showHeader = true, showFooter
                         // ... additional structured data ...
                     })}
                 </script>
-            </Head>
+            </Head> */}
 
             <Script async src="https://www.googletagmanager.com/gtag/js?id=G-EHBXXFWSWR"/>
             <Script id="google-analytics">

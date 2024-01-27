@@ -1,6 +1,7 @@
 // components/seo.tsx
 import Head from 'next/head';
 import sahdani from "@/public/images/sahdani.jpg"
+
 interface SEOProps {
     title: string;
     description?: string;
@@ -35,6 +36,18 @@ const SEO: React.FC<SEOProps> = ({ title, description, image, url }) => {
 
             {/* Favicon */}
             <link rel="icon" href="/favicon.ico" />
+
+            {/* Structured Data */}
+            <script type="application/ld+json" dangerouslySetInnerHTML={{
+                __html: JSON.stringify({
+                    "@context": "http://schema.org",
+                    "@type": "ProfessionalService",
+                    "name": "Hipnoterapi",
+                    "description": "Layanan hipnoterapi profesional untuk meredakan stres, mengatasi fobia, dan mendukung pertumbuhan pribadi.",
+                    "url": "http://www.sahdani.com/hipnoterapi",
+                    // ... additional structured data ...
+                })
+            }} />
         </Head>
     );
 };
