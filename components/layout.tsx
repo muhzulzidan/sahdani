@@ -53,7 +53,7 @@ const Layout: React.FC<LayoutProps> = ({ children, showHeader = true, showFooter
             </Script>
             {showHeader && <Navbar />}
             <main className='max-w-screen-lg bg-stone-100 mx-auto'>{children}</main>
-            {/* {showFooter && <Footer />} */}
+            {showFooter && <Footer />}
         </main>
     )
 }
